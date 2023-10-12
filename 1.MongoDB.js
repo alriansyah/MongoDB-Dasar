@@ -23,3 +23,10 @@
 // - Row, Record                // - Document (JSON, XML, etc.)
 // - Join Table                 // - Embedded Document, Reference
 // - SQL                        // - Javascript (MongoDB)
+
+// Run mongo di windows cmd :
+// lakukan di direktori bin : mongod --dbpath C:\MongoDB\bin\data
+
+
+// Run mongosh (mongo shell) di windows cmd :
+// lakukan di direktori bin : mongosh mongodb://localhost:27017
