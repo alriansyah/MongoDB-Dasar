@@ -61,6 +61,7 @@ db.orders.insertOne({
     ]
 })
 
+// Query Document :
 db.customers.find({
     _id: "khannedy"
 })
