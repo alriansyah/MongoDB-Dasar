@@ -1,18 +1,36 @@
+// Run mongo di windows cmd (administrator) :
+// lakukan di direktori bin : mongod --dbpath C:\MongoDB\bin\data
+
+// Run mongosh (mongo shell) di windows cmd :
+// lakukan di direktori bin : mongosh mongodb://localhost:27017
+
+// Melihat semua database
+// show databases
+
+// Pilih database / masuki ke database :
+// show namadatabases
+
+// Membuat collection : 
 db.createCollection("customers");
 
 db.createCollection("products");
 
 db.createCollection("orders");
 
+// Mengambil semua nama collection :
 db.getCollectionNames();
 
+// Mengambil semua document customers :
 db.customers.find()
 
+// Menambah 1 document :
 db.customers.insertOne({
     _id: "khannedy",
     name: "Eko Kurniawan Khannedy"
 })
 
+// Menambah lebih dari 1 document :
+// new NumberLong("2000") // type data long / 64 bit number (jangakauan lebih dari 9 Milyar)
 db.products.insertMany([
     {
         _id: 1,
@@ -206,7 +224,7 @@ db.products.find({
 
 
 db.customers.find({
-    $where: function (){
+    $where: function () {
         return this._id == this.name;
     }
 })
@@ -424,7 +442,7 @@ db.products.updateMany({}, {
 
 db.products.updateMany({}, {
     $set: {
-        'ratings.$[element]' : 100
+        'ratings.$[element]': 100
     }
 }, {
     arrayFilters: [
@@ -443,23 +461,23 @@ db.products.updateMany({}, {
     }
 })
 
-db.products.find({_id: 1})
+db.products.find({ _id: 1 })
 
-db.products.updateOne({_id: 1}, {
+db.products.updateOne({ _id: 1 }, {
     $addToSet: {
         tags: 'popular'
     }
 })
 
-db.products.updateOne({_id: 1}, {
+db.products.updateOne({ _id: 1 }, {
     $pop: {
         ratings: -1
     }
 })
 
-db.products.find({_id: 2})
+db.products.find({ _id: 2 })
 
-db.products.updateOne({_id: 2}, {
+db.products.updateOne({ _id: 2 }, {
     $pop: {
         ratings: 1
     }
@@ -616,13 +634,13 @@ db.products.find({
 db.products.find({
     category: 'food'
 }).sort({
-    category:1
+    category: 1
 }).explain()
 
 db.products.find({
     category: 'food'
 }).sort({
-    category:-1
+    category: -1
 }).explain()
 
 db.products.find({
@@ -667,7 +685,7 @@ db.products.createIndex({
     category: 'text',
     tags: 'text'
 }, {
-    weights:{
+    weights: {
         name: 10,
         category: 5,
         tags: 1
@@ -715,7 +733,7 @@ db.products.find({
 })
 
 db.customers.createIndex({
-    "customFields.$**" : 1
+    "customFields.$**": 1
 })
 
 db.customers.insertMany([
@@ -746,15 +764,15 @@ db.customers.insertMany([
 ])
 
 db.customers.find({
-    "customFields.passion" : "Entepreneur"
+    "customFields.passion": "Entepreneur"
 }).explain();
 
 db.customers.find({
-    "customFields.ipk" : 3.2
+    "customFields.ipk": 3.2
 }).explain();
 
 db.customers.find({
-    "customFields.hobby" : "Gaming"
+    "customFields.hobby": "Gaming"
 }).explain();
 
 db.createCollection("sessions");
@@ -795,7 +813,7 @@ db.customers.updateOne({
 })
 
 db.customers.find({
-    full_name : "eko Kurniawan Khannedy"
+    full_name: "eko Kurniawan Khannedy"
 });
 
 db.customers.createIndex({
@@ -808,7 +826,7 @@ db.customers.createIndex({
 })
 
 db.customers.find({
-    full_name : "eko Kurniawan Khannedy"
+    full_name: "eko Kurniawan Khannedy"
 }).collation({
     locale: 'en',
     strength: 2
@@ -956,10 +974,10 @@ db.sessions.updateOne({
     }
 })
 
-bin/mongodump --uri="mongodb://mongo:mongo@localhost:27017/belajar?authSource=admin" --out=backup-dump
+bin / mongodump--uri = "mongodb://mongo:mongo@localhost:27017/belajar?authSource=admin" --out = backup - dump
 
-bin/mongoexport --uri="mongodb://mongo:mongo@localhost:27017/belajar?authSource=admin" --collection="customers" --out=customers.json
+bin / mongoexport--uri = "mongodb://mongo:mongo@localhost:27017/belajar?authSource=admin" --collection = "customers" --out = customers.json
 
-bin/mongorestore --uri="mongodb://mongo:mongo@localhost:27017/belajar_restore?authSource=admin" --dir=backup-dump/belajar
+bin / mongorestore--uri = "mongodb://mongo:mongo@localhost:27017/belajar_restore?authSource=admin" --dir = backup - dump / belajar
 
-bin/mongoimport --uri="mongodb://mongo:mongo@localhost:27017/belajar_import?authSource=admin" --collection="customers" --file=customers.json
+bin / mongoimport--uri = "mongodb://mongo:mongo@localhost:27017/belajar_import?authSource=admin" --collection = "customers" --file = customers.json
