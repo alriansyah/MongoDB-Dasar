@@ -122,6 +122,7 @@ db.products.find({
     }
 })
 
+// Logical Operator :
 db.products.find({
     $and: [
         {
