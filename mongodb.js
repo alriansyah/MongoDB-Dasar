@@ -78,6 +78,7 @@ db.orders.find({
     "items.product_id": 1
 })
 
+// Menambah document lebih dari 1
 db.products.insertMany([
     {
         _id: 3,
@@ -99,6 +100,7 @@ db.products.insertMany([
     }
 ])
 
+// Query Document MENGGUNAKAN Operator Comparison :
 db.customers.find({
     _id: {
         $eq: "khannedy"
