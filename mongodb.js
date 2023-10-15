@@ -146,6 +146,7 @@ db.products.find({
     }
 })
 
+// Element Operator :
 db.products.find({
     category: {
         $exists: true
